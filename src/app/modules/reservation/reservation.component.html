@@ -1,0 +1,247 @@
+<section class="container">
+  <section
+    class="reservationContainer"
+    *ngIf="reservationData.length > 0; else noReservation"
+  >
+    <header class="reservationContainer__head">
+      <h1 class="reservationContainer__head__title">
+        {{ "my_reservation" | translate }}
+      </h1>
+    </header>
+    <section class="reservationContainer__body row">
+      <section
+        class="reservationContainer__body__itemContainer col-md-4"
+        *ngFor="let reservation of reservationData; let i = index"
+      >
+        <header
+          class="reservationContainer__body__itemContainer__header"
+          [style.backgroundImage]="
+            'url(' + reservation.property.images[0] + ')'
+          "
+        ></header>
+
+        <section class="reservationContainer__body__itemContainer__mainContent">
+          <!--Main content start name section-->
+          <section
+            class="reservationContainer__body__itemContainer__mainContent__wrapper"
+          >
+            <section
+              class="reservationContainer__body__itemContainer__mainContent__wrapper__title"
+            >
+              <h6>{{ "name" | translate }}</h6>
+            </section>
+
+            <section
+              class="reservationContainer__body__itemContainer__mainContent__wrapper__value"
+            >
+              {{ reservation.property.name }}
+            </section>
+          </section>
+          <!--End name section-->
+          <!--start order number section-->
+          <section
+            class="reservationContainer__body__itemContainer__mainContent__wrapper"
+          >
+            <section
+              class="reservationContainer__body__itemContainer__mainContent__wrapper__title"
+            >
+              <h6>{{ "reservationNum" | translate }}</h6>
+            </section>
+
+            <section
+              class="reservationContainer__body__itemContainer__mainContent__wrapper__value"
+            >
+              {{ reservation.booking_number }}
+            </section>
+          </section>
+          <!--End order number section-->
+
+          <!--start price  section-->
+          <section
+            class="reservationContainer__body__itemContainer__mainContent__wrapper"
+          >
+            <section
+              class="reservationContainer__body__itemContainer__mainContent__wrapper__title"
+            >
+              <h6>{{ "reservation_date" | translate }}</h6>
+            </section>
+
+            <section
+              class="reservationContainer__body__itemContainer__mainContent__wrapper__value"
+            >
+              {{ reservation.date | date: "mediumDate" }}
+            </section>
+          </section>
+
+          <section
+            class="reservationContainer__body__itemContainer__mainContent__wrapper"
+          >
+            <h6 class="congts-msg">{{ "deposit" | translate }}</h6>
+          </section>
+        </section>
+
+        <section class="reservationContainer__body__itemContainer__footer">
+          <a (click)="openModal(template, reservation)">{{
+            "show_detail" | translate
+          }}</a>
+        </section>
+      </section>
+    </section>
+  </section>
+  <ng-template #noReservation>
+    <section class="noReservationContainer">
+      <h3 class="noReservationContainer__title">
+        {{ "no_reservation" | translate }}
+      </h3>
+    </section>
+  </ng-template>
+</section>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{ "reservation_detail" | translate }}</h4>
+  </div>
+  <div class="modal-body">
+    <section class="reservationStatus">
+      <h6 class="inoviceContainer__bodyTitle">
+        {{ "deposit" | translate }}
+      </h6>
+      <section class="invoiceWrapper">
+        <section class="invoiceWrapper__info">
+          {{ "reservation_number" | translate }}
+        </section>
+        <section class="invoiceWrapper__value">
+          {{ selectedReservation.booking_number }}
+        </section>
+      </section>
+      <hr />
+    </section>
+
+    <section class="inoviceContainer">
+      <h6 class="inoviceContainer__bodyTitle">
+        {{ "reservation_detail" | translate }}
+      </h6>
+      <section class="inoviceContainer__invoiceWrapper">
+        <section class="inoviceContainer__invoiceWrapper__info">
+          {{ "date" | translate }}
+        </section>
+        <section class="inoviceContainer__invoiceWrapper__value">
+          {{ selectedReservation.date | date }}
+        </section>
+      </section>
+      <hr />
+
+      <section class="inoviceContainer__invoiceWrapper">
+        <section class="inoviceContainer__invoiceWrapper__info">
+          {{ "activity" | translate }}
+        </section>
+        <section class="inoviceContainer__invoiceWrapper__value">
+          <p>{{ selectedReservation.property.category.name }}</p>
+        </section>
+      </section>
+      <hr />
+
+      <section class="inoviceContainer__invoiceWrapper">
+        <section class="inoviceContainer__invoiceWrapper__info">
+          {{ "property_name" | translate }}
+        </section>
+        <section class="inoviceContainer__invoiceWrapper__value">
+          <p>{{ selectedReservation.property.name }}</p>
+        </section>
+      </section>
+      <hr />
+
+      <ng-container *ngIf="selectedReservation.property.is_offer">
+        <section class="inoviceContainer__invoiceWrapper">
+          <section class="inoviceContainer__invoiceWrapper__info">
+            {{ "will_pay" | translate }}
+          </section>
+          <section class="inoviceContainer__invoiceWrapper__value">
+            <p>
+              {{ calculateWillpay() }}
+              <span>{{ "sar" | translate }}</span>
+            </p>
+          </section>
+        </section>
+        <hr />
+      </ng-container>
+      <ng-container *ngIf="!selectedReservation.property.is_offer">
+        <section class="inoviceContainer__invoiceWrapper">
+          <section class="inoviceContainer__invoiceWrapper__info">
+            {{ "will_pay" | translate }}
+          </section>
+          <section class="inoviceContainer__invoiceWrapper__value">
+            <p>
+              {{ calculateWillpay() }} <span>{{ "sar" | translate }}</span>
+            </p>
+          </section>
+        </section>
+        <hr />
+      </ng-container>
+
+      <ng-container *ngIf="!selectedReservation.property.is_offer">
+        <section class="inoviceContainer__invoiceWrapper">
+          <section class="inoviceContainer__invoiceWrapper__info">
+            {{ "will_pay_entering" | translate }}
+          </section>
+          <section class="inoviceContainer__invoiceWrapper__value">
+            <p>
+              {{ selectedReservation.property.price - calculateWillpay(element) }}
+              <span>{{ "sar" | translate }}</span>
+            </p>
+          </section>
+        </section>
+        <hr />
+      </ng-container>
+
+      <ng-container *ngIf="selectedReservation.property.is_offer">
+        <section class="inoviceContainer__invoiceWrapper">
+          <section class="inoviceContainer__invoiceWrapper__info">
+            {{ "will_pay_entering" | translate }}
+          </section>
+          <section class="inoviceContainer__invoiceWrapper__value">
+            <p>
+              {{ property.offer_price - calculateWillpay(element) }}
+              <span>{{ "sar" | translate }}</span>
+            </p>
+          </section>
+        </section>
+        <hr />
+      </ng-container>
+
+      <ng-container *ngIf="selectedReservation.property.is_offer">
+        <section class="inoviceContainer__invoiceWrapper">
+          <section class="inoviceContainer__invoiceWrapper__info">
+            {{ "total" | translate }}
+          </section>
+          <section class="inoviceContainer__invoiceWrapper__value">
+            <p>
+              {{ selectedReservation.property.offer_price }} <span>{{ "sar" | translate }}</span>
+            </p>
+          </section>
+        </section>
+        <hr />
+      </ng-container>
+
+      <ng-container *ngIf="!selectedReservation.property.is_offer">
+        <section class="invoiceWrapper">
+          <section class="invoiceWrapper__info">
+            {{ "total" | translate }}
+          </section>
+          <section class="invoiceWrapper__value">
+            <p>
+              {{ selectedReservation.property.price }} <span>{{ "sar" | translate }}</span>
+            </p>
+          </section>
+        </section>
+      </ng-container>
+    </section>
+  </div>
+  <div class="modal-footer">
+    <app-custom-btn
+      [name]="'cancel' | translate"
+      [color]="'#d31212'"
+      (isClicked)="modalRef.hide()"
+    ></app-custom-btn>
+  </div>
+</ng-template>

@@ -1,0 +1,227 @@
+<ng-template [ngIf]="loading" [ngIfElse]="itemDetail">
+  <div class="container">
+    <app-loader></app-loader>
+  </div>
+</ng-template>
+
+<ng-template #itemDetail>
+  <ng-container>
+    <section class="container">
+      <section class="unitInfoContainer">
+        <article class="unitInfoContainer__title">
+          <h4>{{ property.name }}</h4>
+          <p>{{ property.description }}</p>
+        </article>
+        <article class="unitInfoContainer__code">
+          <app-rate [rate]="property.rate" [status]="'good'"></app-rate>
+        </article>
+      </section>
+
+      <section class="row">
+        <section class="col-md-4">
+          <article class="itemContainerInfo">
+            <h5 class="title">{{ "activity_detail" | translate }}</h5>
+            <article class="itemInfo">
+              <article class="itemInfo__itemWrap-right">
+                <i class="fas fa-map-marker-alt"></i>
+                <h6>
+                  <strong> {{ "location" | translate }}</strong>
+                </h6>
+              </article>
+              <article class="itemInfo__itemWrap-left">
+                <p>{{ property.city.name }}</p>
+              </article>
+            </article>
+
+            <article class="itemInfo">
+              <article class="itemInfo__itemWrap-right">
+                <i class="fas fa-hotel"></i>
+                <h6>
+                  <strong>{{ "activity" | translate }}</strong>
+                </h6>
+              </article>
+              <article class="itemInfo__itemWrap-left">
+                <p>{{ property.category.name }}</p>
+              </article>
+            </article>
+            <ng-container *ngIf="!property.is_offer">
+              <article class="itemInfo">
+                <article class="itemInfo__itemWrap-right">
+                  <i class="fas fa-dollar-sign"></i>
+                  <h6>
+                    <strong> {{ "price" | translate }}</strong>
+                  </h6>
+                </article>
+                <article class="itemInfo__itemWrap-left">
+                  <p>{{ property.price }}</p>
+                </article>
+              </article>
+            </ng-container>
+            <ng-container *ngIf="property.is_offer">
+              <article class="itemInfo">
+                <article class="itemInfo__itemWrap-right">
+                  <i class="fas fa-dollar-sign"></i>
+                  <h6>
+                    <strong> {{ "price" | translate }}</strong>
+                  </h6>
+                </article>
+                <article class="itemInfo__itemWrap-left">
+                  <p style="color: red">
+                    {{ property.price }} {{ "sar" | translate }}
+                  </p>
+                </article>
+              </article>
+            </ng-container>
+
+            <ng-container *ngIf="property.is_offer">
+              <article class="itemInfo">
+                <article class="itemInfo__itemWrap-right">
+                  <i class="fas fa-dollar-sign"></i>
+                  <h6>
+                    <strong> {{ "price_afterOffer" | translate }}</strong>
+                  </h6>
+                </article>
+                <article class="itemInfo__itemWrap-left">
+                  <p style="color: #15c515">
+                    {{ property.offer_price }} {{ "sar" | translate }}
+                  </p>
+                </article>
+              </article>
+            </ng-container>
+            <ng-container *ngIf="property.capacity">
+              <article class="itemInfo">
+                <article class="itemInfo__itemWrap-right">
+                  <i class="fas fa-user-friends"></i>
+                  <h6>
+                    <strong> {{ "capacity" | translate }}</strong>
+                  </h6>
+                </article>
+                <article class="itemInfo__itemWrap-left">
+                  <p>{{ property.capacity }} {{ "person" | translate }}</p>
+                </article>
+              </article>
+            </ng-container>
+          </article>
+
+          <article class="itemContainerInfo">
+            <h5 class="title">{{ "reservation_date" | translate }}</h5>
+            <article class="itemInfo">
+              <article class="itemInfo__itemWrap-right">
+                <i class="fas fa-calendar-day"></i>
+                <h6 *ngIf="isAvaliable" class="avaliable">
+                  <strong> {{ "avaliable" | translate }}</strong>
+                </h6>
+                <h6 *ngIf="!isAvaliable" class="notAvaliable">
+                  <strong>
+                    {{ "not_avaliable_in_this_day" | translate }}</strong
+                  >
+                </h6>
+              </article>
+              <article class="itemInfo__itemWrap-left date">
+                <p>{{ dateFromUrl | date: "mediumDate" }}</p>
+              </article>
+            </article>
+            <ng-container *ngIf="!isAvaliable">
+              <p>You can check another date</p>
+              <input
+                placeholder="Datepicker"
+                class="form-control"
+                [(ngModel)]="date"
+                [minDate]="minDate"
+                [isOpen]="isOpen"
+                bsDatepicker
+                [outsideClick]="false"
+                (ngModelChange)="getDate($event)"
+                [bsConfig]="{ isAnimated: true }"
+              />
+            </ng-container>
+          </article>
+
+          <article class="itemContainerInfo">
+            <h5 class="title">{{ "panorama_photos" | translate }}</h5>
+            <article class="panoramaImgContainer">
+              <article
+                class="panoramaImgContainer__item"
+                *ngFor="let panoramaImg of property.panoramic_images"
+              >
+                <a
+                  target="_blank"
+                  [href]="
+                    'https://shaleeh.herokuapp.com/panorama' +
+                    '?url=' +
+                    panoramaImg
+                  "
+                >
+                  <article
+                    class="image"
+                    [ngStyle]="getBackgroundStyle(panoramaImg)"
+                  ></article>
+                </a>
+              </article>
+            </article>
+          </article>
+
+          <article
+            class="itemContainerInfo"
+            *ngIf="property.options.length > 0"
+          >
+            <h5 class="title">{{ "facilites" | translate }}</h5>
+            <article class="facilties" *ngFor="let option of property.options">
+              <article class="facilties__title">
+                <h6>
+                  <strong> {{ option.option.name }}</strong>
+                </h6>
+              </article>
+              <article class="facilties__description">
+                <p>{{ option.value }}</p>
+              </article>
+            </article>
+          </article>
+          <ng-container *ngIf="!isAvaliable">
+            <section class="reservation">
+              <button class="btn btn-block" (click)="changeDate()">
+                {{ "not_avaliable_in_this_day" | translate }}
+              </button>
+            </section>
+          </ng-container>
+          <ng-container *ngIf="isAvaliable">
+            <section class="reservation">
+              <app-pay-now-button
+                [loading]="loadingBtn"
+                [btnBlock]="btnBlock"
+                (isClicked)="payNow()"
+                [name]="'reserve_now' | translate"
+              ></app-pay-now-button>
+            </section>
+          </ng-container>
+        </section>
+
+        <section class="col-md-8">
+          <div class="gallaryCard">
+            <ngx-gallery
+              [options]="galleryOptions"
+              [images]="property.images"
+            ></ngx-gallery>
+          </div>
+          <div class="map">
+            <agm-map
+              [latitude]="center.lat"
+              [longitude]="center.lng"
+              [zoom]="5"
+              [fullscreenControl]="true"
+            >
+              <agm-marker
+              [latitude]="property.location.coordinates[1]"
+              [longitude]="property.location.coordinates[0]"
+              [markerDraggable]="true"
+              (dragEnd)="selectMarker($event)"
+            >
+            </agm-marker>
+
+            </agm-map>
+          </div>
+        </section>
+      </section>
+    </section>
+  </ng-container>
+</ng-template>

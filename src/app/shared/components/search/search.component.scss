@@ -1,0 +1,86 @@
+@import '../../../../assets/scss/variables';
+
+::ng-deep {
+  .search__wrapper {
+    .ng-select.ng-select-single .ng-select-container {
+      height: 50px;
+      width: 200px;
+      margin-bottom: 5px;
+    }
+  }
+
+}
+
+@media screen and (max-width: 991px) {
+  ::ng-deep {
+    .search__wrapper {
+      .ng-select.ng-select-single .ng-select-container {
+        height: 40px;
+        width: 100%;
+      }
+    }
+
+  }
+}
+
+.search__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 30px 0;
+  align-items: center;
+  &__titleContainer {
+    h4 {
+      margin: 0;
+      color: #fff;
+    }
+
+    p {
+      color: #fff;
+    }
+  }
+
+  &__submit {
+    button {
+      padding: 0px 50px;
+      background: $main-color;
+      color: #fff;
+      border-radius: 5px;
+      font-weight: 700;
+      height: 50px;
+    }
+  }
+}
+
+select {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  min-width: 198px;
+  margin-bottom: 5px;
+}
+
+input {
+  margin-bottom: 5px;
+}
+
+
+input[type="text"] {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+}
+
+@media screen and(max-width: 930px) {
+  .search__wrapper {
+    margin: 0 10px;
+
+    div {
+      width: 100%;
+    }
+
+    &__submit {
+      button {
+        height: 40px;
+      }
+    }
+  }
+}

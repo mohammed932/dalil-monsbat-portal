@@ -1,0 +1,52 @@
+@import '../../../assets/scss/variables';
+:host {
+  .search__results {
+    min-height: 100vh;
+  
+    h3 {
+      margin-top: 20px;
+    }
+  }
+  
+  @media screen and(max-width: 767px) {
+    .search__results {
+      .filter_btn {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        color: #fff;
+        border-radius: 50%;
+        text-align: center;
+        box-shadow: 0px 0px 15px 2px rgba(105, 105, 105, 0.4);
+        background: $secondary-color;
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        z-index: 999;
+  
+        i {
+          font-size: 20px;
+        }
+      }
+    }
+  
+    .modal-header {
+      .close {
+        span {
+          color: #000;
+          font-size: 30px;
+        }
+        [dir=rtl] & {
+          margin-right: auto;
+        }
+        cursor: pointer;
+      }
+    }
+  
+    .modal-title {
+      color: $secondary-color;
+    }
+  
+  }
+  
+}

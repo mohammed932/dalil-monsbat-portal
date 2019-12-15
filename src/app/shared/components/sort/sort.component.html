@@ -1,0 +1,17 @@
+<section class="arrangement">
+  <ul>
+    <li
+      *ngFor="let arrangment of arrangements"
+      [ngClass]="{ active: arrangment.value === step }"
+    >
+      <a (click)="getArrangmentValue(arrangment.value)">
+        <span>{{ arrangment.title | translate }}</span>
+      </a>
+    </li>
+    <li *ngIf="step">
+      <a (click)="getArrangmentValue('clear')">
+        <span>{{ "clear" | translate }}</span>
+      </a>
+    </li>
+  </ul>
+</section>

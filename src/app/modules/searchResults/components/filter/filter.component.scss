@@ -1,0 +1,26 @@
+@import '../../../../../assets/scss/variables';
+
+.filterWrapper {
+
+  .filterInputContainer {
+    margin-bottom: 10px;
+  }
+
+}
+
+.resetForm {
+  background: green;
+  color: #fff;
+}
+@media screen and (min-width: 760px) {
+  .filterWrapper {
+    box-shadow: 0 0 15px 0 rgba(105, 105, 105, 0.3);
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 30px;
+    height: auto;
+
+
+  }
+}

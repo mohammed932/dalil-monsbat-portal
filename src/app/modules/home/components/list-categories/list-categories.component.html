@@ -1,0 +1,20 @@
+<ng-template [ngIf]="loading" [ngIfElse]="categoryItem">
+  <app-loader> </app-loader>
+</ng-template>
+<ng-template #categoryItem>
+  <header>
+    <h4>{{ "categories" | translate }}</h4>
+  </header>
+  <section class="row" [@cardAnimation]="categories$.length">
+    <article
+      class="category col-md-4 col-6"
+      *ngFor="let category of categories$"
+    >
+      <app-single-category
+        [imgSrc]="category.image"
+        [categoryTitle]="category.name"
+        [tag]="category._id"
+      ></app-single-category>
+    </article>
+  </section>
+</ng-template>

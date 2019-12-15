@@ -1,0 +1,188 @@
+  @import '../../../../../assets/scss/variables';
+
+
+  :host {
+    agm-map {
+      margin-bottom: 30px;
+    }
+
+    .unitInfoContainer {
+      display: flex;
+      width: 100%;
+      background: #fff;
+      padding: 15px;
+      box-shadow: 0 0 15px 0 rgba(105, 105, 105, .3);
+      border-radius: 5px;
+      margin: 30px 0;
+      align-items: center;
+
+      &__code {
+        margin-left: auto;
+        margin-right: 10px;
+        margin-top: 10px;
+        padding: 5px;
+        text-align: center;
+        color: #fff;
+
+        [dir=rtl] & {
+          margin-right: auto;
+          margin-left: 10px;
+        }
+      }
+    }
+
+
+    .gallaryCard {
+      background: #fff;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .map {
+      margin-bottom: 15px;
+    }
+
+
+    .itemContainerInfo {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px 0 rgba(105, 105, 105, .3);
+      margin-bottom: 15px;
+
+      .facilties {
+        background: #f1f1f1;
+        border-radius: 10px;
+        margin: 10px 0;
+        padding: 10px;
+
+
+        &__description {
+          display: block;
+          color: #000;
+
+        }
+      }
+
+      .title {
+        color: $main-color;
+      }
+
+      .itemInfo {
+        display: flex;
+        margin-bottom: 10px;
+        margin-top: 10px;
+
+
+
+
+        &__itemWrap-right {
+          i {
+            color: $secondary-color;
+            font-size: 18px;
+            position: relative;
+            width: 30px;
+          }
+
+          h6 {
+            text-transform: capitalize;
+            display: inline-block;
+          }
+
+          .avaliable {
+            color: #15c515;
+          }
+
+          .notAvaliable {
+            color: #f83232;
+          }
+        }
+
+        &__itemWrap-left {
+          margin-left: auto;
+
+          [dir=rtl] & {
+            margin-right: auto;
+            margin-left: initial;
+          }
+        }
+
+        .date {
+          border-radius: 10px;
+          font-weight: 700;
+        }
+      }
+
+      .barContainer {
+        margin-bottom: 15px;
+
+        span {
+          font-weight: normal;
+        }
+      }
+
+      .panoramaImgContainer {
+        display: flex;
+        justify-content: space-between;
+        margin:10px 5px;
+        &__item {
+          a {
+            .image {
+              width: 100px;
+              border: 1px solid #999;
+              border-radius: 10px;
+              display: inline-block;
+              height: 100px;
+              background-size: cover;
+              position: relative;
+              background-position: center;
+            }
+          }
+        }
+
+  
+      }
+    }
+
+
+    .reservation {
+      margin-bottom: 10px;
+      .btn {
+        background: $submitBtn;
+        color: #fff;
+      }
+    }
+
+    @media screen and(max-width: 670px) {
+      agm-map {
+        height: 200px;
+        margin-bottom: 15px;
+      }
+
+      .itemContainerInfo {
+        margin-top: 15px;
+
+        .panoramaImgContainer {
+          a {
+            .image {
+              width: 75px !important;
+              height: 75px !important;
+              background-size: cover;
+              position: relative;
+              background-position: center;
+            }
+
+          }
+        }
+      }
+    }
+
+    agm-map {
+      height: 300px;
+      margin-bottom: 15px;
+    }
+
+  }

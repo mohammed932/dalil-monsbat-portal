@@ -1,0 +1,55 @@
+<ngx-loading-bar></ngx-loading-bar>
+<main class="main">
+  <router-outlet></router-outlet>
+</main>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{ "dalelMonsabat" | translate }}</h4>
+  </div>
+  <div class="modal-body">{{ "RateThis" | translate }} {{ property.name }}</div>
+  <!-- <section class="ratingContainer">
+      <star-rating
+        value="0"
+        checkedcolor="#26caa7"
+        uncheckedcolor="#5d47d0"
+        totalstars="10"
+        size="50px"
+        readonly="false"
+        (rate)="onRate($event)"
+      ></star-rating>
+    </section> -->
+
+  <section class="ratingContainer">
+    <label
+      class="rating"
+      [class.checked]="radiobutton === model.rate"
+      *ngFor="let radiobutton of radioItems"
+    >
+      <input
+        type="radio"
+        name="options"
+        (click)="model.rate = radiobutton"
+        [checked]="radiobutton === model.rate"
+        (change)="onRate()"
+      />{{ radiobutton }}
+    </label>
+  </section>
+
+  <!-- 
+  <label class="container"
+    >2
+    <input class="rateRadioInput" type="radio" name="radio" />
+    <span class="checkmark"></span>
+  </label>
+  <label class="container"
+    >3
+    <input class="rateRadioInput" type="radio" name="radio" />
+    <span class="checkmark"></span>
+  </label>
+  <label class="container"
+    >4
+    <input class="rateRadioInput" type="radio" name="radio" />
+    <span class="checkmark"></span>
+  </label> -->
+</ng-template>

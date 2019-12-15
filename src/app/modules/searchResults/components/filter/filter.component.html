@@ -1,0 +1,149 @@
+<div class="filterWrapper">
+  <article class="row">
+    <article class="col-md-12 filterInputContainer">
+      <input
+        placeholder="Datepicker"
+        class="form-control"
+        [(ngModel)]="date"
+        [minDate]="minDate"
+        bsDatepicker
+        (ngModelChange)="getDate($event)"
+        [bsConfig]="{ isAnimated: true }"
+      />
+    </article>
+    <article class="col-md-12">
+      <article class="form-group">
+        <input
+          class="form-control"
+          #searchPropertyName
+          [(ngModel)]="property_name"
+          [placeholder]="'property_owner' | translate"
+        />
+      </article>
+    </article>
+    <article class="col-md-6">
+      <article class="form-group">
+        <input
+          class="form-control"
+          #priceFromInput
+          [(ngModel)]="price_from"
+          [placeholder]="'price_from' | translate"
+        />
+      </article>
+    </article>
+
+    <article class="col-md-6">
+      <article class="form-group">
+        <input
+          class="form-control"
+          #priceToInput
+          [(ngModel)]="price_to"
+          [placeholder]="'price_to' | translate"
+        />
+      </article>
+    </article>
+    <article class="col-md-6">
+      <article class="form-group">
+        <input
+          class="form-control"
+          #searchByCapcityFromInput
+          [(ngModel)]="capacity_from"
+          [placeholder]="'capacity_from' | translate"
+        />
+      </article>
+    </article>
+
+    <article class="col-md-6">
+      <article class="form-group">
+        <input
+          class="form-control"
+          #searchByCapcityToInput
+          (keyup)="getCapacityTo()"
+          [(ngModel)]="capacity_to"
+          [placeholder]="'capacity_to' | translate"
+        />
+      </article>
+    </article>
+    <article class="col-md-12 filterInputContainer">
+      <ng-select
+        [items]="cities"
+        bindLabel="name"
+        bindValue="_id"
+        (change)="selectCity($event)"
+        [(ngModel)]="city"
+        [placeholder]="'select_city' | translate"
+      >
+      </ng-select>
+    </article>
+    <article class="col-md-12 filterInputContainer">
+      <ng-select
+        [items]="occasions"
+        bindValue="_id"
+        bindLabel="name"
+        [(ngModel)]="occasion"
+        (change)="selectOccasion()"
+        [placeholder]="'select_occasion' | translate"
+      >
+      </ng-select>
+    </article>
+
+    <article class="col-md-6 filterInputContainer">
+      <ng-select
+        [items]="rate"
+        bindValue="number"
+        bindLabel="number"
+        (change)="selectRateFrom($event)"
+        [(ngModel)]="rate_from"
+        placeholder="Rate from"
+      >
+      </ng-select>
+    </article>
+
+    <article class="col-md-6 filterInputContainer">
+      <ng-select
+        [items]="rate"
+        bindValue="number"
+        bindLabel="number"
+        (change)="selectRateTo($event)"
+        [(ngModel)]="rate_to"
+        placeholder="Rate to"
+      >
+      </ng-select>
+    </article>
+    <article class="col-md-12 filterInputContainer">
+      <ng-select
+        [items]="categories"
+        bindValue="_id"
+        bindLabel="name"
+        (change)="selectCategory($event)"
+        [(ngModel)]="categoryId"
+        [placeholder]="'select_category' | translate"
+      >
+      </ng-select>
+    </article>
+
+    <ng-container *ngIf="hideSubCategory">
+      <article class="col-md-12 filterInputContainer">
+        <ng-select
+          [items]="subCategory"
+          bindValue="_id"
+          bindLabel="name"
+          [(ngModel)]="subCategoryId"
+          (change)="selectSubCategory($event)"
+          [placeholder]="'select_subCategory' | translate"
+        >
+        </ng-select>
+      </article>
+    </ng-container>
+
+    <section class="col-md-12">
+      <button
+        class="btn resetForm"
+        style="border-radius: 5px"
+        (click)="resetForm()"
+      >
+        {{ "reset_form" | translate }}
+      </button>
+    </section>
+  </article>
+</div>

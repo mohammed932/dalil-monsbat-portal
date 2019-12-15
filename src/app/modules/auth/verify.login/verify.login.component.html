@@ -1,0 +1,49 @@
+<div class="formContainer">
+  <section class="roundCycle ">
+    <div class="row text-center">
+      <div class="col-md-12 head">
+        <h6>{{ "verifcationCode" | translate }}</h6>
+        <p>{{ "verifyMessage" | translate }}</p>
+      </div>
+    </div>
+    <form [formGroup]="verifyCodeForm">
+      <input
+        type="phone"
+        class="form-control"
+        formControlName="mobile"
+        placeholder="5xxxxxxxxxx"
+        autocomplete="off"
+        required
+        aria-describedby="basic-addon1"
+      />
+
+      <div class="edit__login">
+        <div class="edit__login__number">
+          <a [routerLink]="['/auth/login'] | localize">{{
+            "editNumber" | translate
+          }}</a>
+        </div>
+        <div class="edit__login__resend">
+          <ng-container
+            [counter]="counter"
+            [interval]="interval"
+            (value)="value = $event"
+          >
+            <button
+              type="button"
+              [disabled]="value !== 0"
+              (click)="resendCode()"
+            >
+              {{ "resend" | translate }}
+              <span *ngIf="value !== 0">{{ value }}</span>
+            </button>
+          </ng-container>
+        </div>
+      </div>
+
+      <button class="btn btn-block submit_btn" type="submit" (click)="verifyCode()">
+        {{'verify' | translate}}
+      </button>
+    </form>
+  </section>
+</div>

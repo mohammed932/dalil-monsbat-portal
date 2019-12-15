@@ -1,0 +1,90 @@
+<footer class="nwfooter">
+  <div class="footer__container container">
+    <div class="row">
+      <section class="col-6 col-md-4">
+        <ul>
+          <li>
+            <a href="#" [routerLink]="['/special-conditions'] | localize">{{
+              "special_conditions" | translate
+            }}</a>
+          </li>
+          <li>
+            <a [routerLink]="['/frequently-asked-questions'] | localize">{{
+              "frequent_questions" | translate
+            }}</a>
+          </li>
+          <li><a [routerLink]="['/about-us'] | localize">{{'contact_us' | translate}}</a></li>
+        </ul>
+      </section>
+
+      <section class="col-12 col-md-4 text-center">
+        <h4>{{ "download_app" | translate }}</h4>
+        <div class="download__app">
+          <a href="#">
+            <img
+              src="/assets/image/googleplay.png"
+              class="img-fluid"
+              alt=" Google Play App Store"
+              width="150px"
+            />
+          </a>
+          <a href="#">
+            <img
+              src="/assets/image/appstore.png"
+              class="img-fluid"
+              alt="Itunes App Store"
+              width="150px"
+            />
+          </a>
+        </div>
+
+        <section class="supportNumber">
+          <h5>{{ "support_number" | translate }}</h5>
+          <p>{{ config?.support_number }}</p>
+        </section>
+      </section>
+
+      <section class="col-xs-12 col-md-4 text-center">
+        <article class="social__links">
+          <ul class="Social__list" style="text-align: center;margin-top: 45px">
+            <li class="Social__list__item">
+              <a
+                class="Social__list__item__link"
+                [href]="config?.facebook"
+                target="_blank"
+              >
+                <i class="fab fa-facebook"></i>
+              </a>
+            </li>
+            <li class="Social__list__item">
+              <a class="Social__list__item__link" [href]="config?.twitter" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+            <li class="Social__list__item">
+              <a
+                class="Social__list__item__link"
+                [href]="config?.instagram"
+                target="_blank"
+              >
+              <i class="fab fa-instagram"></i>
+            </a>
+            </li>
+          </ul>
+        </article>
+        <a href="https://maroof.sa/87090" target="_blank">
+          <img src="/assets/image/footer-img.jpg">
+        </a>
+      </section>
+    </div>
+  </div>
+</footer>
+
+<footer id="nwcopyrights" class="nwcopyrights">
+  <div class="nwcopyrights__container">
+    <p class="nwcopyrights__text">
+      <span id="18a9cb58-bbe8-414f-9219-55c00df45f78"></span>
+      {{ "rights" | translate }}
+    </p>
+  </div>
+</footer>

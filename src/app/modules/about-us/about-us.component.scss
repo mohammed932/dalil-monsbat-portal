@@ -1,0 +1,50 @@
+@import '../../../assets/scss/variables';
+
+:host {
+  .aboutUsWrapper {
+    background: #fff;
+    margin: 90px auto;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    min-height: 400px;
+    overflow: hidden;
+    background: white;
+    border-radius: 10px;
+    background-size: cover;
+
+    background:
+    linear-gradient(to top, $main-color-light, $main-color-light-1),
+      url(/assets/image/login-img-1.jpeg);
+    &__title {
+      text-align: center;
+      font-size: 24px;
+      color: #fff;
+    }
+
+    &__body {
+      margin-bottom: 15px;
+      &__text {
+        font-size: 18px;
+        text-align: center;
+        color: #000;
+      }
+    }
+
+    &__footer {
+      &__title {
+        text-align: center;
+        font-size: 24px;
+        color: #fff;
+      }
+      &__text {
+        text-align: center;
+        color: #000;
+        font-weight: 700;
+        font-size: 20px;
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+<div class="formContainer">
+  <section class="roundCycle ">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h6>{{ "loginAndSignUp" | translate }}</h6>
+        <p>{{ "joib_dalelMonsabat" | translate }}</p>
+      </div>
+      <div class="col-md-4 col-4">
+        <svg-icon
+          src="/assets/image/browser-white.svg"
+          [svgStyle]="{ 'width.px': svgWidth }"
+        ></svg-icon>
+        <p>{{ "pay_less" | translate }}</p>
+      </div>
+      <div class="col-md-4 col-4">
+        <svg-icon
+          src="/assets/image/360-degrees-b-white.svg"
+          [svgStyle]="{ 'width.px': svgWidth }"
+        ></svg-icon>
+        <p>{{ "panoramaView" | translate }}</p>
+      </div>
+
+      <div class="col-md-4 col-4">
+        <svg-icon
+          src="/assets/image/online-pay-white.svg"
+          [svgStyle]="{ 'width.px': svgWidth }"
+        ></svg-icon>
+        <p>{{ "payment_option" | translate }}</p>
+      </div>
+    </div>
+    <form [formGroup]="loginForm">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">+966</span>
+        </div>
+        <input
+          type="phone"
+          class="form-control"
+          formControlName="mobile"
+          placeholder="5xxxxxxxxxx"
+          autocomplete="off"
+          required
+          aria-describedby="basic-addon1"
+        />
+      </div>
+      <button class="btn btn-block submit_btn" type="submit" (click)="login()">
+        {{ "login" | translate }}
+      </button>
+    </form>
+  </section>
+</div>

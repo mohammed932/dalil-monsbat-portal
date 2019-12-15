@@ -1,0 +1,56 @@
+@import '../../../assets/scss/variables';
+
+
+
+.nwfooter {
+  border-top: 8px solid #eece49;
+  background-image: linear-gradient(to top, #26caa7 0%, #72afd3 100%);
+  color: #fff;
+  padding-top: 30px;
+  padding-bottom: 40px;
+  font-size: 15px;
+}
+
+.nwcopyrights {
+  background: #26caa7;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  text-align: center;
+  color: #fff;
+}
+
+.social__links {
+  .Social__list {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 20px;
+
+    &__item {
+      font-size: 1.5em;
+    }
+  }
+}
+
+.download__app {
+  display: flex;
+  justify-content: center;
+
+  a {
+    margin: 10px 5px;
+  }
+}
+
+ul {
+  li {
+    list-style-type: none;
+    a {
+      color: #fff;
+      text-decoration: none;
+      transition: all .5s ease-in-out;
+
+      &:hover {
+        color: $main-color;
+      }
+    }
+  }
+}

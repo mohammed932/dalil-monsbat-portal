@@ -1,0 +1,45 @@
+@import '../../../assets/scss/variables';
+
+:host {
+  background: $main-color;
+  color: #fff;
+  position: fixed;
+  left: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 20%;
+  min-width: 210px;
+  z-index: 9999;
+  box-shadow: 0 2px 22px 0 rgba(0, 0, 0, .2), 0 2px 30px 0 rgba(0, 0, 0, .35);
+}
+
+ul {
+  font-size: 18px;
+  line-height: 3;
+  font-weight: 400;
+  padding-top: 50px;
+  list-style: none;
+  padding-right: 0;
+
+  li {
+    padding-right: 10px;
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      width: 100%;
+      position: relative;
+      display: block;
+    }
+  }
+}
+
+:host {
+  a.active {
+    display: block;
+    color: blue;
+    background: yellow;
+  }
+
+}

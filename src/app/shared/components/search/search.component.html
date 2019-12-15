@@ -1,0 +1,42 @@
+<section class="container">
+  <section class="search__wrapper ">
+    <div class="search__wrapper__titleContainer">
+      <h4>{{ "search" | translate }}</h4>
+    </div>
+    <div class="search__wrapper__cityContainer">
+      <ng-select
+        [items]="cities"
+        bindValue="_id"
+        bindLabel="name"
+        [(ngModel)]="cityId"
+        [placeholder]="'select_city' | translate"
+      >
+      </ng-select>
+    </div>
+    <div class="search__wrapper__dateContainer">
+      <input
+        placeholder="Datepicker"
+        class="form-control"
+        [(ngModel)]="date"
+        bsDatepicker
+        [minDate]="minDate"
+        [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }"
+      />
+    </div>
+    <div class="search__wrapper__chaletsContainer">
+      <ng-select
+        [items]="occasions"
+        bindValue="_id"
+        bindLabel="name"
+        [(ngModel)]="occasionId"
+        [placeholder]="'select_occasion' | translate"
+      >
+      </ng-select>
+    </div>
+    <div class="search__wrapper__submit">
+      <button class="btn btn-block" (click)="submitSearch()">
+        {{ "search" | translate }}
+      </button>
+    </div>
+  </section>
+</section>

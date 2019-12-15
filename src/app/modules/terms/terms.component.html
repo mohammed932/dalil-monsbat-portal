@@ -1,0 +1,17 @@
+<section class="specialConditionWrapper container">
+  <section class="specialConditionWrapper__title">
+    <h3>{{ "frequent_questions" | translate }}</h3>
+  </section>
+  <hr>
+  <section
+    class="specialConditionWrapper__body"
+    *ngFor="let question of questions; let i = index"
+  >
+    <h6>
+      <span>{{ i + 1 }}</span> -{{ question.question }}
+    </h6>
+    <p class="SpecialConditionWrapper__body__text">
+      {{ question.answer }}
+    </p>
+  </section>
+</section>

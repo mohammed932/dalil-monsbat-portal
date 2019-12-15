@@ -1,0 +1,97 @@
+@import '../../../../assets/scss/variables';
+
+
+:host {
+  .formContainer {
+    min-height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .roundCycle {
+    width: 60%;
+    padding: 70px 15px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: white;
+    border-radius: 10px;
+    background-size: cover;
+    background:
+    linear-gradient(to top, $main-color-light, $main-color-light-1),
+      url(/assets/image/login-img-1.jpeg);
+    p {
+      color: #fff;
+    }
+    h6 {
+      font-size: 20px;
+      color: $secondary-color;
+    }
+
+  }
+
+  form {
+    width: 50%;
+    .input-group {
+      margin: 20px auto;
+      .input-group-prepend {
+        .input-group-text {
+          [dir=rtl] & {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+          }
+        }
+      }
+      .form-control:not(:first-child) {
+        [dir=rtl] & {
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+          border-top-right-radius: 0px;
+          border-bottom-right-radius: 0px;
+        }
+      }
+    }
+  }
+
+  .submit_btn {
+    background: $secondary-color;
+    color: #fff;
+    margin: 10px 0;
+    padding: 10px 0px;
+  }
+
+  @media screen and(max-width: 767px) {
+    .formContainer {
+      margin: 40px auto;
+      min-height: 300px;
+
+      .roundCycle {
+        width: 90% !important;
+        padding: 45px 15px !important;
+      }
+    }
+
+    form {
+      width: 95%;
+      margin: 10px auto;
+    }
+
+  }
+
+
+}
+
+
+
+:ng-deep {
+  svg-icon {
+    svg {
+      width: 40px !important;
+    }
+  }
+
+}

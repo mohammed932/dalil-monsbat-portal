@@ -1,0 +1,48 @@
+@import '../../../assets/scss/variables';
+
+:host {
+  .specialConditionWrapper {
+    background: #fff;
+    margin: 90px auto;
+    padding: 20px;
+    display: flex;
+    min-height: 500px;
+    flex-direction: column;
+    &__title {
+      font-size: 24px;
+      color: #000;
+    }
+
+    &__body {
+      margin-bottom: 15px;
+      margin-top: 15px;
+      &__text {
+        font-size: 18px;
+        color: #000;
+        word-break: break-word;
+      }
+    }
+
+    &__footer {
+      &__title {
+        text-align: center;
+        font-size: 24px;
+        color: #fff;
+      }
+      &__text {
+        text-align: center;
+        color: #000;
+        font-weight: 700;
+        font-size: 20px;
+      }
+    }
+    hr {
+      overflow-y: auto;
+      width: 100%;
+      border-bottom: 1px solid #f1f1f1;
+      margin-bottom: 10px;
+    }
+  }
+
+
+}

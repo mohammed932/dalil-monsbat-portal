@@ -1,0 +1,338 @@
+<section class="checkoutWrapper container">
+  <section class="checkoutWrapper__title">
+    <h5>{{ "checkout_detail" | translate }}</h5>
+  </section>
+  <section class="row">
+    <section class="col-md-5">
+      <section class="inoviceContainer">
+        <h6>{{ "payment_detail" | translate }}</h6>
+        <ng-container *ngIf="property.is_offer">
+          <section class="invoiceWrapper">
+            <section class="invoiceWrapper__info">
+              {{ "will_pay" | translate }}
+            </section>
+            <section class="invoiceWrapper__value">
+              <p>
+                {{ calculateWillpay() }}
+                <span>{{ "sar" | translate }}</span>
+              </p>
+            </section>
+          </section>
+        </ng-container>
+        <ng-container *ngIf="!property.is_offer">
+          <section class="invoiceWrapper">
+            <section class="invoiceWrapper__info">
+              {{ "will_pay" | translate }}
+            </section>
+            <section class="invoiceWrapper__value">
+              <p>
+                {{ calculateWillpay() }} <span>{{ "sar" | translate }}</span>
+              </p>
+            </section>
+          </section>
+        </ng-container>
+
+        <ng-container *ngIf="!property.is_offer">
+          <section class="invoiceWrapper">
+            <section class="invoiceWrapper__info">
+              {{ "will_pay_entering" | translate }}
+            </section>
+            <section class="invoiceWrapper__value">
+              <p>
+                {{ property.price - calculateWillpay(element) }}
+                <span>{{ "sar" | translate }}</span>
+              </p>
+            </section>
+          </section>
+        </ng-container>
+
+        <ng-container *ngIf="property.is_offer">
+          <section class="invoiceWrapper">
+            <section class="invoiceWrapper__info">
+              {{ "will_pay_entering" | translate }}
+            </section>
+            <section class="invoiceWrapper__value">
+              <p>
+                {{ property.offer_price - calculateWillpay(element) }}
+                <span>{{ "sar" | translate }}</span>
+              </p>
+            </section>
+          </section>
+        </ng-container>
+
+        <ng-container *ngIf="property.is_offer">
+          <section class="invoiceWrapper">
+            <section class="invoiceWrapper__info">
+              {{ "total" | translate }}
+            </section>
+            <section class="invoiceWrapper__value">
+              <p>
+                {{ property.offer_price }} <span>{{ "sar" | translate }}</span>
+              </p>
+            </section>
+          </section>
+        </ng-container>
+
+        <ng-container *ngIf="!property.is_offer">
+          <section class="invoiceWrapper">
+            <section class="invoiceWrapper__info">
+              {{ "total" | translate }}
+            </section>
+            <section class="invoiceWrapper__value">
+              <p>
+                {{ property.price }} <span>{{ "sar" | translate }}</span>
+              </p>
+            </section>
+          </section>
+        </ng-container>
+      </section>
+
+      <section class="reservationDetails">
+        <h6>{{ "reservation_detail" | translate }}</h6>
+        <section class="propertyShow">
+          <section class="propertyShow__imgContainer">
+            <img [src]="property.images[0].small" />
+          </section>
+          <section class="propertyShow__detail">
+            <p>{{ property.name }}</p>
+            <p>{{ property.city.name }}</p>
+            <p>
+              {{ property.price }} <span>{{ "sar" | translate }}</span>
+            </p>
+          </section>
+          <section class="propertyShow__date">
+            <p>{{ property.date }}</p>
+          </section>
+        </section>
+        <hr />
+        <div class="specialConditions">
+          <h6>{{ "special_conditions" | translate }}</h6>
+          <p>
+            {{ property.special_conditions }}
+          </p>
+        </div>
+      </section>
+    </section>
+    <section class="col-md-7">
+      <section class="paymentMethodsWrapper">
+        <section class="paymentMethodsWrapper__head">
+          <section class="paymentMethodsWrapper__head__title">
+            <h6>{{ "payment_methods" | translate }}</h6>
+          </section>
+          <section class="paymentMethodsHead__message"></section>
+        </section>
+        <section class="paymentMethodsWrapper__method">
+          <section class="input">
+            <input
+              type="radio"
+              id="test1"
+              value="payford"
+              name="radio-group"
+              checked
+            />
+            <label for="test1"
+              >Payford
+              <p class="text-1">
+                {{ "reservation_confirmed" | translate }}
+              </p>
+            </label>
+          </section>
+          <section class="logo">
+            <img src="/assets/image/visa.png" />
+          </section>
+        </section>
+      </section>
+
+      <section class="reservation__container">
+        <section class="reservation__container__submit">
+          <app-pay-now-button
+            [btnBlock]="''"
+            (isClicked)="confirmCheckout(template)"
+            [name]="'pay_now' | translate"
+          ></app-pay-now-button>
+        </section>
+        <section class="reservation__container__finalPrice">
+          <p>
+            {{ calculateWillpay() }} <span>{{ "sar" | translate }}</span>
+          </p>
+          <p>{{ "will_pay" | translate }}</p>
+        </section>
+      </section>
+    </section>
+  </section>
+</section>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{ "dalel_monsabat" | translate }}</h4>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngIf="!isConfirmed">
+      <section class="confirmContainer">
+        <h6>{{ "reservationMessage" | translate }}</h6>
+        <p>{{ "date" | translate }}</p>
+        <p>{{ date }}</p>
+      </section>
+    </ng-container>
+    <ng-container *ngIf="isConfirmed">
+      <section class="inoviceContainer">
+        <h6 class="inoviceContainer__bodyTitle">
+          {{ "deposit" | translate }}
+        </h6>
+        <section class="invoiceWrapper">
+          <section class="invoiceWrapper__info">
+            {{ "reservation_number" | translate }}
+          </section>
+          <section class="invoiceWrapper__value">
+            {{ property.booking_number }}
+          </section>
+        </section>
+      </section>
+      <hr />
+      <section class="inoviceContainer">
+        <h6 class="inoviceContainer__bodyTitle">
+          {{ "reservation_detail" | translate }}
+        </h6>
+        <section class="invoiceWrapper">
+          <section class="invoiceWrapper__info">
+            {{ "date" | translate }}
+          </section>
+          <section class="invoiceWrapper__value">
+            {{ property.date | date }}
+          </section>
+        </section>
+        <hr />
+        <section class="invoiceWrapper">
+          <section class="invoiceWrapper__info">
+            {{ "activity" | translate }}
+          </section>
+          <section class="invoiceWrapper__value">
+            <p>{{ property.category.name }}</p>
+          </section>
+        </section>
+        <hr />
+
+        <section class="invoiceWrapper">
+          <section class="invoiceWrapper__info">
+            {{ "property_name" | translate }}
+          </section>
+          <section class="invoiceWrapper__value">
+            <p>{{ property.name }}</p>
+          </section>
+        </section>
+        <hr />
+
+        <ng-container *ngIf="property.is_offer">
+          <section class="invoiceWrapper">
+            <section class="invoiceWrapper__info">
+              {{ "will_pay" | translate }}
+            </section>
+            <section class="invoiceWrapper__value">
+              <p>
+                {{ calculateWillpay() }}
+                <span>{{ "sar" | translate }}</span>
+              </p>
+            </section>
+          </section>
+          <hr />
+        </ng-container>
+        <ng-container *ngIf="!property.is_offer">
+          <section class="invoiceWrapper">
+            <section class="invoiceWrapper__info">
+              {{ "will_pay" | translate }}
+            </section>
+            <section class="invoiceWrapper__value">
+              <p>
+                {{ calculateWillpay() }} <span>{{ "sar" | translate }}</span>
+              </p>
+            </section>
+          </section>
+          <hr />
+        </ng-container>
+
+        <ng-container *ngIf="!property.is_offer">
+          <section class="invoiceWrapper">
+            <section class="invoiceWrapper__info">
+              {{ "will_pay_entering" | translate }}
+            </section>
+            <section class="invoiceWrapper__value">
+              <p>
+                {{ property.price - calculateWillpay(element) }}
+                <span>{{ "sar" | translate }}</span>
+              </p>
+            </section>
+          </section>
+          <hr />
+        </ng-container>
+
+        <ng-container *ngIf="property.is_offer">
+          <section class="invoiceWrapper">
+            <section class="invoiceWrapper__info">
+              {{ "will_pay_entering" | translate }}
+            </section>
+            <section class="invoiceWrapper__value">
+              <p>
+                {{ property.offer_price - calculateWillpay(element) }}
+                <span>{{ "sar" | translate }}</span>
+              </p>
+            </section>
+          </section>
+          <hr />
+        </ng-container>
+
+        <ng-container *ngIf="property.is_offer">
+          <section class="invoiceWrapper">
+            <section class="invoiceWrapper__info">
+              {{ "total" | translate }}
+            </section>
+            <section class="invoiceWrapper__value">
+              <p>
+                {{ property.offer_price }} <span>{{ "sar" | translate }}</span>
+              </p>
+            </section>
+          </section>
+          <hr />
+        </ng-container>
+
+        <ng-container *ngIf="!property.is_offer">
+          <section class="invoiceWrapper">
+            <section class="invoiceWrapper__info">
+              {{ "total" | translate }}
+            </section>
+            <section class="invoiceWrapper__value">
+              <p>
+                {{ property.price }} <span>{{ "sar" | translate }}</span>
+              </p>
+            </section>
+          </section>
+        </ng-container>
+      </section>
+    </ng-container>
+  </div>
+  <div class="modal-footer">
+    <ng-container *ngIf="!isConfirmed">
+      <app-custom-btn></app-custom-btn>
+      <app-pay-now-button
+        [loading]="loading"
+        [name]="'confirm' | translate"
+        [btnBlock]="''"
+        (isClicked)="payNow()"
+      ></app-pay-now-button>
+    </ng-container>
+    <ng-container *ngIf="!isConfirmed">
+      <app-custom-btn
+        [name]="'cancel' | translate"
+        [color]="'#d31212'"
+        (isClicked)="modalRef.hide()"
+      ></app-custom-btn>
+    </ng-container>
+    <ng-container *ngIf="isConfirmed">
+      <app-custom-btn
+        [color]="'#248024'"
+        [loading]="loading"
+        [name]="'my_reservation' | translate"
+        (isClicked)="goToMyReservation()"
+      ></app-custom-btn>
+    </ng-container>
+  </div>
+</ng-template>

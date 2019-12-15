@@ -1,0 +1,51 @@
+<div class="sidebar">
+  <ul>
+    <li>
+      <a
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLink]="['/' | localize]"
+      >
+        {{ "main" | translate }}
+      </a>
+    </li>
+
+    <li *ngIf="authService.isToken() || (isLoggedOut$ | async)">
+      <a [routerLink]="'/reservation' | localize" routerLinkActive="active">
+        {{ "my_reservation" | translate }}
+      </a>
+    </li>
+
+    <li *ngIf="authService.isToken() || (isLoggedOut$ | async)">
+      <a [routerLink]="'/checkout' | localize" routerLinkActive="active">
+        {{ "checkoutText" | translate }}
+      </a>
+    </li>
+    <li routerLinkActive="active">
+      <a
+        [routerLink]="['/search-results' | localize]"
+        [queryParams]="{ page: 1, category: 'offers' }"
+      >
+        {{ "special_offers" | translate }}
+      </a>
+    </li>
+    <li routerLinkActive="active">
+      <a [routerLink]="['/about-us' | localize]">
+        {{ "contact_us" | translate }}
+      </a>
+    </li>
+    <li *ngIf="!authService.isToken() || !(isLoggedOut$ | async)">
+      <a [routerLink]="'/auth/login' | localize" routerLinkActive="active">
+        {{ "loginAndSignUp" | translate }}
+      </a>
+    </li>
+    <li *ngIf="authService.isToken() || (isLoggedOut$ | async)">
+      <a (click)="logOut()" routerLinkActive="active">
+        {{ "logout" | translate }}
+      </a>
+    </li>
+    <li>
+      <a (click)="switchLang()">{{ "language" | translate }}</a>
+    </li>
+  </ul>
+</div>
