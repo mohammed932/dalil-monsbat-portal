@@ -13,7 +13,11 @@
               "frequent_questions" | translate
             }}</a>
           </li>
-          <li><a [routerLink]="['/about-us'] | localize">{{'contact_us' | translate}}</a></li>
+          <li>
+            <a [routerLink]="['/about-us'] | localize">{{
+              "contact_us" | translate
+            }}</a>
+          </li>
         </ul>
       </section>
 
@@ -57,7 +61,11 @@
               </a>
             </li>
             <li class="Social__list__item">
-              <a class="Social__list__item__link" [href]="config?.twitter" target="_blank">
+              <a
+                class="Social__list__item__link"
+                [href]="config?.twitter"
+                target="_blank"
+              >
                 <i class="fab fa-twitter"></i>
               </a>
             </li>
@@ -67,13 +75,13 @@
                 [href]="config?.instagram"
                 target="_blank"
               >
-              <i class="fab fa-instagram"></i>
-            </a>
+                <i class="fab fa-instagram"></i>
+              </a>
             </li>
           </ul>
         </article>
         <a href="https://maroof.sa/87090" target="_blank">
-          <img src="/assets/image/footer-img.jpg">
+          <img src="/assets/image/marof.png" />
         </a>
       </section>
     </div>
